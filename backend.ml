@@ -1,34 +1,30 @@
-
 (*This is the backend file of the program. All the functions are implemented here*)
 
 (*Errors*)
 exception InvalidInput
 exception Error
 
-type element = (* Type element that shows whether the index type *)
-	| None
-	| Some of float
-;;
+type symbol = string*int;; (*prev - string, Now string*int(Basically pair of symbol, arity) *)
+type variable = string;;
+type arity = int;;
+type pair = (symbol*arity);;
+type constant = string;; (*Also can be called atom*)
+type term = V of variable
+	| Node of symbol*(term list) (*prev - symbol , Now - pair*)
+	| C of constant
+	;;
+type signature = pair list;;
+type substitution = (variable*term) list;;
+type atomicFormula = (symbol * term list);;
 
-type sheet = element array array;;
+type body = atomicFormula list;;
 
-let is_some (e:element) = (*It indicates whether the given element contains a value of not*)
-	match e with
-	| None -> false
-	| Some a -> true
-;;
-
-let is_none (e:element) = (*It indicates whether the given element contains a value of not*)
-	match e with
-	| None -> true
-	| Some a -> false
-;;
-
-let value e : float = (*If an element e contains a value then it returns the float value of that element*) 
-	match e with
-	Some (a) -> a
-	|None -> raise InvalidInput
-;;
+type fact = atomicFormula;;
+type rule = (atomicFormula*body);;
+type clause = F of fact;;
+	| R of rule
+	;;
+type program = clause list;;
 (* let rows = 10;;
 let cols = 10;;
 
