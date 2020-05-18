@@ -1,7 +1,7 @@
 {
 
 	open Parser
-	exception Eof ;;
+	exception Eof;;
 }
 
 let DIGIT = ['0'-'9']
@@ -18,7 +18,7 @@ rule token = parse
 | (Capital)(string*) as str {VARIABLE(str)}
 | (string*) as str {STRING (str)}
 | ':'	{COLON}
-| eof {raise Eof}
+| eof {ENDOFFILE}
 | '.'('\n')? {EOL}
 | ('+'|'-')?(['0']|['1'-'9']['0'-'9']*)('.'['0'-'9']+)? as flt {FLOAT(float_of_string flt)}
 | ('+'|'-')?(['0']|['1'-'9']['0'-'9']*) as flt {INT(int_of_string flt)}
