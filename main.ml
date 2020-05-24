@@ -22,12 +22,13 @@ let table =  (*Copied from rachit*)
         (Node(("file_end",0),[]),[]) -> acc
         | _ -> (createTable (result::acc)) 
       in 
-    (printTable(createTable []));
     (createTable [])
 ;;
 
 let _ =  (*copied from rachit*)
+(* printTable table; *)
   Printf.printf "?-"; flush stdout;
+  
   let lexbuf = Lexing.from_channel stdin in
     while true do
       let result = Parser.main Lexer.token lexbuf in
