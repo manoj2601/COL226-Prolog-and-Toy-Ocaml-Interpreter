@@ -1,28 +1,7 @@
-%{	(*Here we initilize all the functions which may use in the next assignment. For our convenience,
-assume that return type of these functions in int *)
+%{
 open Backend
 exception InvalidInput
 exception Error
-
-(* let rec FormingTable l lexbuf =
-  let input = Parser.main Lexer.token lexbuf in
-  match input with
-  | Node ( ( ("Eof", 0), []), []) -> l
-  | _ -> FormingTable (input::l)
-;; *)
-
-
-
-(* let table = (*Forming table*)
-  try
-    let in_stream = open_in Sys.argv.(1) in
-    let lexbuf = Lexing.from_channel in_stream in
-    let ret = FormingTable [] lexbuf in
-    close_in in_stream;
-    ret
-  with e ->
-    Printf.printf "File Not found!";
-    raise e *)
 %}
 
   %token <float> FLOAT

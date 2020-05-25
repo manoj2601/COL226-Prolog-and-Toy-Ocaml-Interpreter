@@ -6,7 +6,7 @@ knowing(X, Y) :-
     
 knowing(X, Y) :-
     friend(Y, X).
-
 friend(tom, jerry).
 friend(X, X).
+
 unknown(X, jerry).

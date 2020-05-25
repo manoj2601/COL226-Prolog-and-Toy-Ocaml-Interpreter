@@ -3,11 +3,8 @@
 (*Errors*)
 exception InvalidInput
 exception ErrorInGoal
-exception Error1
 exception NotFound
 exception NotFound1
-exception NotFound2
-exception NotFound3
 exception WrongSubstitution
 
 type symbol = string*int;;
@@ -78,7 +75,7 @@ let rec subst (t:term) (s:substitution) : term =
 			| (a,b) -> if a = v then true else isvarinsub v xs
 	and termforvar (v:variable) (s:substitution) : term =
 	match s with
-	| [] -> raise Error1
+	| [] -> raise WrongSubstitution
 	| x::xs -> match x with
 				| (a,b) -> if a = v then b else termforvar v xs;
 ;;
@@ -192,6 +189,7 @@ and printResult2 (sub:substitution) (vset: term list) (cvset: term list)=
 							V(x) -> (
 								let ter = searchInSub sub x in
 								match ter with 
+								| V("NotFound") -> printResult2 sub xs cvset;
 								| V(var) -> if (isPresent var cvset) then (Printf.printf "\n%s = " x; printSubTerm ter; printResult2 sub xs cvset;) else (printResult2 sub xs cvset;)
 								| _ -> (Printf.printf "\n%s = " x; printSubTerm ter; printResult2 sub xs cvset;)
 								)
@@ -202,10 +200,13 @@ and printResult2 (sub:substitution) (vset: term list) (cvset: term list)=
 		match vset with x::xs -> if x = V(var) then true else isPresent var xs | [] -> false
 	and searchInSub (sub:substitution) (var:variable) =
 	match sub with
-												x::xs -> (match x with (var2, t) -> if var = var2 then t else searchInSub xs var)
-												| _ -> raise NotFound
+												x::xs -> (
+													match x with 
+														(var2, t) -> if var = var2 then t else searchInSub xs var
+														| _ -> raise WrongSubstitution
+													)
 											
-								| _ -> raise NotFound
+								| _ -> V("NotFound")
 ;;
 
 let rec shouldloopnext (inisubs:substitutionR) (vset: term list) =
