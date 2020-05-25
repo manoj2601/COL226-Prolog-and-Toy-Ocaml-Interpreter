@@ -43,7 +43,7 @@ exception Error
 %%
 main:
   clause1 EOL{ $1 }		/*If the input is of valid type then expr will return the updated arr as $1. and main will return an integer value 1.*/
-  | ENDOFFILE {(Node(("file_end", 0), []), [])}
+  | ENDOFFILE {(Node(("EoF", 0), []), [])}
 ;
  /*Here all the valid type of input formats are listed. */
 

@@ -6,7 +6,7 @@
 
 let DIGIT = ['0'-'9']
 let Capital = ['A'-'Z''_']
-let string = ['a'-'z']['A'-'Z''a'-'z''_']*
+let Small = ['a'-'z']['A'-'Z''a'-'z''_''0'-'9']*
 
 rule token = parse
 | ';'	{SEMICOLON}
@@ -15,8 +15,8 @@ rule token = parse
 | ')'	{PARENTHESISCLOSE}
 | ','	{COMMA}
 | [' ' '\t''\n']+ {token lexbuf}
-| (Capital)(string*) as str {VARIABLE(str)}
-| (string*) as str {STRING (str)}
+| (Capital)(Small*) as str {VARIABLE(str)}
+| (Small*) as str {STRING (str)}
 | ':'	{COLON}
 | eof {ENDOFFILE}
 | '.'('\n')? {EOL}

@@ -1,10 +1,12 @@
-loves(X, Y) :-
-    likes(X, Y), likes(Y, X).
+bestfriends(X, Y) :-
+    knowing(X, Y), knowing(Y, X).
 
-likes(A, B) :-
-    friend(A, B).
+knowing(X, Y) :-
+    friend(X, Y).
     
-likes(C, D) :-
-    friend(D, C).
+knowing(X, Y) :-
+    friend(Y, X).
 
 friend(tom, jerry).
+friend(X, X).
+unknown(X, jerry).
