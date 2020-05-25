@@ -6,9 +6,9 @@ all:
 	ocamlc -c lexer.ml
 	ocamlc -c parser.ml
 	ocamlc -c main.ml
-	ocamlc -o toyprolog backend.cmo  lexer.cmo parser.cmo main.cmo 
+	ocamlc -o swipl backend.cmo  lexer.cmo parser.cmo main.cmo 
 	
 clean:
-	rm toyprolog *.cmo *.cmi *.mli lexer.ml parser.ml
+	rm swipl *.cmo *.cmi *.mli lexer.ml parser.ml
 run:
-	./toyprolog input.pl
+	./swipl input.pl

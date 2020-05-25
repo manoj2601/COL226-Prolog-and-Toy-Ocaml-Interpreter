@@ -15,33 +15,11 @@ type token =
 
 open Parsing;;
 let _ = parse_error;;
-# 1 "parser.mly"
-	(*Here we initilize all the functions which may use in the next assignment. For our convenience,
-assume that return type of these functions in int *)
+# 2 "parser.mly"
 open Backend
 exception InvalidInput
 exception Error
-
-(* let rec FormingTable l lexbuf =
-  let input = Parser.main Lexer.token lexbuf in
-  match input with
-  | Node ( ( ("Eof", 0), []), []) -> l
-  | _ -> FormingTable (input::l)
-;; *)
-
-
-
-(* let table = (*Forming table*)
-  try
-    let in_stream = open_in Sys.argv.(1) in
-    let lexbuf = Lexing.from_channel in_stream in
-    let ret = FormingTable [] lexbuf in
-    close_in in_stream;
-    ret
-  with e ->
-    Printf.printf "File Not found!";
-    raise e *)
-# 45 "parser.ml"
+# 23 "parser.ml"
 let yytransl_const = [|
   259 (* IF *);
   262 (* SEMICOLON *);
@@ -125,89 +103,89 @@ let yyact = [|
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'clause1) in
     Obj.repr(
-# 45 "parser.mly"
+# 24 "parser.mly"
              ( _1 )
-# 131 "parser.ml"
+# 109 "parser.ml"
                : Backend.clause))
 ; (fun __caml_parser_env ->
     Obj.repr(
-# 46 "parser.mly"
-              ((Node(("file_end", 0), []), []))
-# 137 "parser.ml"
+# 25 "parser.mly"
+              ((Node(("EoF", 0), []), []))
+# 115 "parser.ml"
                : Backend.clause))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'singleAtom) in
     Obj.repr(
-# 51 "parser.mly"
+# 30 "parser.mly"
              ( (_1,[]) )
-# 144 "parser.ml"
+# 122 "parser.ml"
                : 'clause1))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'singleAtom) in
     let _3 = (Parsing.peek_val __caml_parser_env 0 : 'body) in
     Obj.repr(
-# 52 "parser.mly"
+# 31 "parser.mly"
                         ( (_1, _3) )
-# 152 "parser.ml"
+# 130 "parser.ml"
                : 'clause1))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
-# 56 "parser.mly"
+# 35 "parser.mly"
          (Node((_1, 0), []) )
-# 159 "parser.ml"
+# 137 "parser.ml"
                : 'singleAtom))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : string) in
     let _3 = (Parsing.peek_val __caml_parser_env 1 : 'termlist) in
     Obj.repr(
-# 57 "parser.mly"
+# 36 "parser.mly"
                                                      (Node( (_1, List.length _3), _3))
-# 167 "parser.ml"
+# 145 "parser.ml"
                : 'singleAtom))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
-# 60 "parser.mly"
+# 39 "parser.mly"
            ( V(_1))
-# 174 "parser.ml"
+# 152 "parser.ml"
                : 'term))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'singleAtom) in
     Obj.repr(
-# 61 "parser.mly"
+# 40 "parser.mly"
                (_1)
-# 181 "parser.ml"
+# 159 "parser.ml"
                : 'term))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'term) in
     Obj.repr(
-# 64 "parser.mly"
+# 43 "parser.mly"
               ( [_1] )
-# 188 "parser.ml"
+# 166 "parser.ml"
                : 'termlist))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'term) in
     let _3 = (Parsing.peek_val __caml_parser_env 0 : 'termlist) in
     Obj.repr(
-# 65 "parser.mly"
+# 44 "parser.mly"
                           ( _1::_3 )
-# 196 "parser.ml"
+# 174 "parser.ml"
                : 'termlist))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'singleAtom) in
     Obj.repr(
-# 68 "parser.mly"
+# 47 "parser.mly"
                (_1::[])
-# 203 "parser.ml"
+# 181 "parser.ml"
                : 'body))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'singleAtom) in
     let _3 = (Parsing.peek_val __caml_parser_env 0 : 'body) in
     Obj.repr(
-# 69 "parser.mly"
+# 48 "parser.mly"
                           (_1::_3)
-# 211 "parser.ml"
+# 189 "parser.ml"
                : 'body))
 (* Entry main *)
 ; (fun __caml_parser_env -> raise (Parsing.YYexit (Parsing.peek_val __caml_parser_env 0)))
