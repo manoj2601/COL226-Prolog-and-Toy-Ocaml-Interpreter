@@ -6,6 +6,7 @@ exception ErrorInGoal
 exception NotFound
 exception NotFound1
 exception WrongSubstitution
+exception InvalidTerm
 
 type symbol = string*int;;
 type variable = string;;
@@ -49,6 +50,7 @@ let rec subst (t:term) (s:substitution) : term =
 	| Node (sym, tl) -> let list = helper tl s in
 						let t = Node (sym, list) in
 						t
+	| _ -> raise InvalidTerm
 	and helper (tl:term list) (s:substitution) : term list =
 	match tl with
 	| [] -> []
@@ -165,6 +167,7 @@ let rec printSubTerm (t: term) = (*Printing the substituted term*)
 	match t with
 	| V(var) -> Printf.printf "%s" var;
 	| Node(sym, tl) -> (match sym with (name, leng) -> Printf.printf "%s" name;)
+	| _ -> Printf.printf "Invalid type of term \n";
 ;;
 let rec printResult (subR:substitutionR) (vset: term list) = (*Printing the final result*)
 	match subR with (true, sub) -> (if (List.length vset = 0) then Printf.printf "true." else printResult2 sub vset vset) 
@@ -189,7 +192,6 @@ and printResult2 (sub:substitution) (vset: term list) (cvset: term list)=
 												x::xs -> (
 													match x with 
 														(var2, t) -> if var = var2 then t else searchInSub xs var
-														| _ -> raise WrongSubstitution
 													)
 											
 								| _ -> V("NotFound")

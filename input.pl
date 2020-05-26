@@ -1,12 +1,8 @@
 bestfriends(X, Y) :-
-    knowing(X, Y), knowing(Y, X).
+    friends(X, Y), friends(Y, X).
 
-knowing(X, Y) :-
-    friend(X, Y).
+friends(X, Y) :-
+    known(X, Y).
     
-knowing(X, Y) :-
-    friend(Y, X).
-friend(tom, jerry).
-friend(X, X).
-
-unknown(X, jerry).
+known(tom, jerry).
+known(jerry, tom).
