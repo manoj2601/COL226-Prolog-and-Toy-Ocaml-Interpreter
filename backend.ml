@@ -18,20 +18,6 @@ type term = V of variable
 	type clause = term * term list;; (*If term list size is zero, than clause is fact, else rule*)
 	type substitution = (variable*term) list;;
 	type substitutionR = bool*substitution;;
-(* 
-	let rec printTable l = match l with x::xs -> (printClause x);Printf.printf "NEXT CLAUSE \n\n\n\n"; (printTable xs);
-	| [] -> Printf.printf "EMPTY"
-	and printClause c = match c with (ter, terl) -> Printf.printf "Clause Start XXXXXXXXXXX\n"; (printTerm ter); Printf.printf "\nXXXXXXXXX MAPPED TO \n"; (printTerms terl);
-	and printTerms tl = match tl with [] -> Printf.printf ""; | x::xs -> (printTerm x);(Printf.printf "next term\n");(printTerms xs);
-	and printTerm t = match t with V(str) ->  Printf.printf "Variable %s\n" str;
-	|Node((str,integ),children) -> Printf.printf "Symbol %s,%d\n Children\n" str integ; (printTerms children);Printf.printf "ChildrenOver\n";
-	;; 
-
-	let rec printSubstitution (sub: substitution) =
-		match sub with
-		| x::xs -> (match x with (var, term) -> Printf.printf"var is : %s " var; printTerm term; printSubstitution xs;)
-		| _ -> Printf.printf "end!!";
-		;; *)
 	let rec ithelement (i:int) l = (*ith element of the list*)
 	match l with
 	| [] -> raise InvalidInput
