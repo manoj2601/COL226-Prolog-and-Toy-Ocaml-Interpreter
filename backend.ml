@@ -43,7 +43,6 @@ let rec createVList (t:term) : term list = (*Creating a list of variables in the
 			)
 ;;
 
-(*Copied from assignment 4 starts*)
 let rec subst (t:term) (s:substitution) : term =
 	match t with
 	| V (x) -> if (isvarinsub x s) then (termforvar x s) else V (x);
@@ -121,6 +120,7 @@ let rec mguhelper (t1:term) (t2:term) (sub:substitution):substitutionR =
 								if (isvarinterm x t21) then (false, []) else 
 								(true, (composition [sub;[p]]));)
 									)
+			| _ -> raise InvalidTerm
 		)
 	| Node ((str1,l1), tl) -> 
 			(match t21 with
@@ -139,7 +139,9 @@ let rec mguhelper (t1:term) (t2:term) (sub:substitution):substitutionR =
 								done;
 								if(!subR) then	(true, (!ret))
 								else (false, [])
-							)
+			| _ -> raise InvalidTerm
+			)
+	| _ -> raise InvalidTerm
 	end
 	else (true,sub)
 	and isvarinterm (v:variable) (t:term) : bool =
@@ -154,8 +156,6 @@ let rec mguhelper (t1:term) (t2:term) (sub:substitution):substitutionR =
 				 if (!isgot = true) then true else false)
 	| _ -> false
 	;;
-
-(*Copied from assignment 4 ends*)
 
 let rec unify (t1:term) (t2:term) (inisubs:substitutionR) : substitutionR =
 		match inisubs with
@@ -227,7 +227,6 @@ let rec loopOnCList (inisubs:substitutionR) (table1: clause list) (g:term) (lgoa
 							match ret with
 							|	(true,sub1) -> (true, sub1)
 							| (false, sub) -> loopOnCList inisubs xs g lgoals table vset
-							| _ -> raise WrongSubstitution
 							)
 	| _ -> (false, []) (*If program clauses ends*)
 			
